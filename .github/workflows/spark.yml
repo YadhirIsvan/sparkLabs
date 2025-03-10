@@ -29,6 +29,17 @@ jobs:
 
       # Step 2: List files in the repository (for debugging purposes)
       - run: ls -la
+      - name: GIT commit and push docs
+        env: 
+          CI_COMMIT_MESSAGE: save spark results
+          CI_COMMIT_AUTHOR: adsoft 
+        run: |
+          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
+          git config --global user.email "adsoft@live.com.mx"
+          git add results
+          git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+          git push
+
 
       # Step 3: Set up Python
       - uses: actions/setup-python@v5
